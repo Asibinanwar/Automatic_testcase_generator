@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Case Generator - AI-Powered</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-flask"></i>
+                    <h1>Test Case Generator</h1>
+                </div>
+                <p class="subtitle">AI-Powered Test Case Generation from User Stories</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Configuration Section -->
+            <section class="config-section">
+                <div class="section-header">
+                    <i class="fas fa-cog"></i>
+                    <h2>Configuration</h2>
+                </div>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label for="ai-provider">AI Provider</label>
+                        <select id="ai-provider" class="form-select">
+                            <option value="gemini">Gemini</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                        </select>
+                    </div>
+                    <div class="config-item">
+                        <label for="story-id">Story ID</label>
+                        <input type="text" id="story-id" class="form-input" value="US001" placeholder="US001">
+                    </div>
+                    <div class="config-item">
+                        <label for="story-title">Story Title</label>
+                        <input type="text" id="story-title" class="form-input" value="Custom User Story" placeholder="Enter story title">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="section-header">
+                    <i class="fas fa-edit"></i>
+                    <h2>User Story Input</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="user-story">User Story</label>
+                    <textarea id="user-story" class="form-textarea" rows="4" placeholder="As a [user type], I want to [action/feature] so that [benefit/value]."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="acceptance-criteria">Acceptance Criteria</label>
+                    <textarea id="acceptance-criteria" class="form-textarea" rows="6" placeholder="1. [First acceptance criterion]&#10;2. [Second acceptance criterion]&#10;3. [Third acceptance criterion]&#10;4. [Add more as needed]"></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="load-examples" class="btn btn-secondary">
+                        <i class="fas fa-lightbulb"></i>
+                        Load Examples
+                    </button>
+                    <button id="test-provider" class="btn btn-warning">
+                        <i class="fas fa-vial"></i>
+                        Test AI Provider
+                    </button>
+                    <button id="generate-btn" class="btn btn-primary">
+                        <i class="fas fa-magic"></i>
+                        Generate Test Cases
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <div class="section-header">
+                    <i class="fas fa-list-check"></i>
+                    <h2>Generated Test Cases</h2>
+                </div>
+                
+                <div class="results-content">
+                    <div class="results-header">
+                        <div class="results-info">
+                            <span class="story-info" id="story-info"></span>
+                            <span class="timestamp" id="timestamp"></span>
+                        </div>
+                        <div class="results-actions">
+                            <button id="export-btn" class="btn btn-success">
+                                <i class="fas fa-download"></i>
+                                Export to Excel
+                            </button>
+                            <button id="copy-btn" class="btn btn-secondary">
+                                <i class="fas fa-copy"></i>
+                                Copy to Clipboard
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-body">
+                        <pre id="test-cases-output" class="test-cases-output"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" class="loading-overlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <p>Generating test cases...</p>
+                    <p class="loading-subtitle">This may take a few moments</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Test Case Generator. Built with AI-powered technology.</p>
+        </footer>
+    </div>
+
+    <!-- Examples Modal -->
+    <div id="examples-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Example User Stories</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="examples-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 
